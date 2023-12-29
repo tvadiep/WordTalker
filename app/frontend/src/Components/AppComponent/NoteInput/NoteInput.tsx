@@ -10,8 +10,21 @@ export const NoteInput = forwardRef<HTMLInputElement, NoteInputProps>(
   ({ onSubmit }, ref) => {
     return (
       <form onSubmit={onSubmit}>
-        <TextField inputRef={ref} />
-        <SubmitButton type="submit" />
+        <TextField
+          inputRef={ref}
+          sx={{
+            "& input": {
+              maxHeight: "5px",
+            },
+          }}
+        />
+        <SubmitButton
+          type="submit"
+          sx={{
+            marginLeft: "5px",
+            padding: "6px",
+          }}
+        />
       </form>
     );
   }

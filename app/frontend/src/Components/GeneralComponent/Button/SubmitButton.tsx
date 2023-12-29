@@ -4,15 +4,7 @@ import SendIcon from "@mui/icons-material/Send";
 
 export const SubmitButton = (props: any) => {
   return (
-    <Button
-      variant="contained"
-      endIcon={<SendIcon />}
-      sx={{
-        paddingY: 2,
-        paddingX: 2,
-      }}
-      {...props}
-    >
+    <Button variant="contained" endIcon={<SendIcon />} {...props}>
       Add Note
     </Button>
   );

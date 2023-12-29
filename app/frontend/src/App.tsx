@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 
-import { DeleteButton, Note } from "./Components/GeneralComponent";
+import { Note } from "./Components/GeneralComponent";
 import { addNote } from "./store/notes/notesSlice";
-import { NoteInput } from "./Components/AppComponent";
+import { NoteInput, NotesContainer } from "./Components/AppComponent";
+import { Stack, rgbToHex } from "@mui/material";
 
 function App() {
   const notes = useAppSelector((state) => state.notes.list);
@@ -20,18 +21,26 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <DeleteButton onClick={() => console.log("deleted")} />
-
-      {notes.map((note) => (
-        <>
-          <Note note={note} key={note.id} />
-          <br />
-        </>
-      ))}
+    <Stack
+      direction="column"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: rgbToHex("rgb(246,247,255)"),
+        height: "100vh",
+      }}
+    >
+      <NotesContainer>
+        {notes.map((note) => (
+          <>
+            <Note note={note} key={note.id} />
+            <br />
+          </>
+        ))}
+      </NotesContainer>
       <br />
       <NoteInput onSubmit={handleAddNote} ref={inputRef} />
-    </div>
+    </Stack>
   );
 }
 

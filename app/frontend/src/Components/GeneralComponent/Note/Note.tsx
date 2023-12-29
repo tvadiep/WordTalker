@@ -13,24 +13,34 @@ export const LoginForm = () => {
     </Box>
   );
 };
+
 export const Note = (props: any) => {
   const dispatch = useAppDispatch();
 
   const handleRemoveNote = () => dispatch(removeNote(props.note.id));
+
+  const handleDownloadSpeech = () => {
+    console.log("Downloading the speech from AWS...");
+  };
   return (
     <Box
       sx={{
-        backgroundColor: "gray",
+        backgroundColor: "white",
+        borderRadius: "5px",
+        paddingX: "5px",
       }}
     >
-      <Stack direction={"row"}>
+      <Stack direction="row" justifyContent={"space-between"}>
         <Box>
-          <Typography variant="h5">{props.note.id} </Typography>
-          <Typography variant="h5">{props.note?.content}</Typography>
-          <Typography variant="h6">12:00 Nov 11, 2023</Typography>
+          <Typography variant="body1">
+            {props.note?.id}. {props.note?.content}
+          </Typography>
+          <Typography variant="body2">12:00 Nov 11, 2023</Typography>
         </Box>
-        <DeleteButton onClick={handleRemoveNote} />
-        <DownloadButton />
+        <Box>
+          <DeleteButton onClick={handleRemoveNote} />
+          <DownloadButton onClick={handleDownloadSpeech} />
+        </Box>
       </Stack>
     </Box>
   );
