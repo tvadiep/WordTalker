@@ -7,10 +7,12 @@ interface Note {
 
 interface NotesState {
   list: Note[];
+  max: number;
 }
 
 const initialState: NotesState = {
   list: [],
+  max: 0,
 };
 
 const notesSlice = createSlice({
@@ -19,13 +21,19 @@ const notesSlice = createSlice({
   reducers: {
     addNote(state, action: PayloadAction<string>) {
       const newNote: Note = {
-        id: state.list.length + 1,
+        id: state.max + 1,
         content: action.payload,
       };
       state.list.push(newNote);
+      state.max = state.max + 1;
+      return state;
+    },
+    removeNote(state, action: PayloadAction<number>) {
+      state.list = state.list.filter((note) => note.id !== action.payload);
+      return state;
     },
   },
 });
 
-export const { addNote } = notesSlice.actions;
+export const { addNote, removeNote } = notesSlice.actions;
 export default notesSlice.reducer;

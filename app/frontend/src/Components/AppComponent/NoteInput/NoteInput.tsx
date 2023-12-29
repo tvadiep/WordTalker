@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { TextInput, SubmitButton } from "../../GeneralComponent";
-import { Stack } from "@mui/material";
+import React, { forwardRef } from "react";
+import { SubmitButton } from "../../GeneralComponent";
+import { TextField } from "@mui/material";
 
-export const NoteInput = () => {
-  const [note, setNote] = useState("");
+interface NoteInputProps {
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault(); // Prevents the default form submission behavior
-    console.log("note is: ", note);
-  };
-
-  useEffect(() => {}, [note]);
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <Stack direction={"row"} spacing={1}>
-        <TextInput
-          value={note}
-          onChange={(e: any) => setNote(e.target.value)}
-        />
+export const NoteInput = forwardRef<HTMLInputElement, NoteInputProps>(
+  ({ onSubmit }, ref) => {
+    return (
+      <form onSubmit={onSubmit}>
+        <TextField inputRef={ref} />
         <SubmitButton type="submit" />
-      </Stack>
-    </form>
-  );
-};
+      </form>
+    );
+  }
+);

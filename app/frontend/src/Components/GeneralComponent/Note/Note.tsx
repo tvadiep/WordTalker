@@ -1,4 +1,6 @@
 import React from "react";
+import { useAppDispatch } from "../../../store/hooks";
+import { removeNote } from "../../../store/notes/notesSlice";
 import { Box, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { DeleteButton } from "../Button/DeleteButton";
@@ -11,7 +13,10 @@ export const LoginForm = () => {
     </Box>
   );
 };
-export const Note = () => {
+export const Note = (props: any) => {
+  const dispatch = useAppDispatch();
+
+  const handleRemoveNote = () => dispatch(removeNote(props.note.id));
   return (
     <Box
       sx={{
@@ -20,10 +25,11 @@ export const Note = () => {
     >
       <Stack direction={"row"}>
         <Box>
-          <Typography variant="h5">Do homework</Typography>
+          <Typography variant="h5">{props.note.id} </Typography>
+          <Typography variant="h5">{props.note?.content}</Typography>
           <Typography variant="h6">12:00 Nov 11, 2023</Typography>
         </Box>
-        <DeleteButton />
+        <DeleteButton onClick={handleRemoveNote} />
         <DownloadButton />
       </Stack>
     </Box>
